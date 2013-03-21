@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html i18n-values="dir:textdirection;" id="uber">
+<head>
+	<meta charset="utf-8">
+	<title i18n-content="pageTitle"></title>
+	<link id="favicon" rel="icon" type="image/png" sizes="16x16">
+	<link id="favicon2x" rel="icon" type="image/png" sizes="32x32">
+
+	<link rel="stylesheet" href="/options/css/chrome_shared.css">
+	<link rel="stylesheet" href="/options/css/main.css">
+	<link rel="stylesheet" href="/options/css/navigation.css">
+	<link rel="stylesheet" href="/options/css/custom.css">
+	<link rel="stylesheet" href="/options/css/application.css">
+
+	<script type="text/javascript" src="/options/lib/third-party.js"></script>
+	<script type="text/javascript" src="/options/lib/utilities.js"></script>
+	<script type="text/javascript" src="/options/lib/application.js"></script>
+	<script type="text/javascript" src="/options/main.js"></script>
+</head>
+
+<body i18n-values=".style.fontFamily:fontfamily;.style.fontSize:fontsize" style="font-family: 'Lucida Grande', sans-serif; font-size: 75%;">
+
+	<div id="navigation">
+    	<h1 i18n-content="shortProductName">Options</h1>
+		<p class="subTitle">Site Visit Limiter</p>
+    	<ul>
+        	<li class="selected"><button class="custom-appearance" data-source="rules.html" i18n-content="rulesDisplayName">Rules</button></li>
+        	<li><button class="custom-appearance" data-source="about.html" i18n-content="aboutDisplayName">About</button></li>
+    	</ul>
+	</div>
+
+	<div class="iframe-container selected">
+		<iframe class="content-target" src="rules.html"></iframe>
+	</div>
+
+</body>
+</html>

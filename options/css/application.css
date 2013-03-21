@@ -1,0 +1,16 @@
+/**
+ * CSS rules specific to the extension's option pages go here.
+ */
+
+ul.rules-list{
+	list-style:none;
+	margin:10px 0px;
+	padding:0px;
+}
+
+	ul.rules-list li.rule{
+		display:block;
+		margin:10px 0px;
+		padding:0px;
+		width:100%;
+	}

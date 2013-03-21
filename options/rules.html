@@ -1,0 +1,60 @@
+<html i18n-values="dir:textdirection;" class="" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+	<link rel="stylesheet" href="/options/css/chrome_shared.css">
+	<link rel="stylesheet" href="/options/css/content.css">
+	<link rel="stylesheet" href="/options/css/custom.css">
+	<link rel="stylesheet" href="/options/css/application.css">
+
+	<script type="text/javascript" src="/options/lib/third-party.js"></script>
+	<script type="text/javascript" src="/options/lib/utilities.js"></script>
+	<script type="text/javascript" src="/options/lib/application.js"></script>
+	<script type="text/javascript" src="/options/rules.js"></script>
+    <title></title>
+</head>
+
+<body class="uber-frame" i18n-values=".style.fontFamily:fontfamily;.style.fontSize:fontsize" style="font-family: 'Lucida Grande', sans-serif; font-size: 75%;">
+
+	<div class="page">
+
+    	<h1 i18n-content="rulesDisplayName">Rules</h1>
+
+    	<div class="content-area">
+			<ul>
+				<li><strong>Matching Pattern</strong> - The matching pattern is a regular expression used to match a requested host name to a specific rule. For example the simple pattern "nytimes" will match nytimes.com, www.nytimes.com, blogs.nytimes.com and so on. See the examples below for more advanced examples, and use the URL Pattern testing tool below to verify your patterns.</li>
+				<li><strong>Daily Visit Limit</strong> - The number of visits allowed in a 24 hour period. This resets every day at midnight.</li>
+				<li><strong>Grace Period</strong> - <em>optional</em> The number of minutes in which a repeat visit will not count against the daily visit limit. This is optional but highly recommended, otherwise any attempt to click on links after the first page loads will fail.</li>
+				<li><strong>Cooldown Period</strong> - <em>optional</em> The number of minutes before a new visit is allowed.</li>
+			</ul>
+		</div>
+
+		<h2>Examples</h2>
+
+		<!-- TODO -->
+
+		<h2>Test a Pattern</h2>
+
+    	<div class="content-area">
+			<form action="" class="login" method="post">
+				<input class="text" name="test_pattern" placeholder="Pattern" type="text" value=""/>
+				<input class="text" name="test_url" placeholder="URL it should match" type="text" value=""/>
+				<button class="test-pattern" name="test-pattern">Test</button>
+			</form>
+		</div>
+
+		<h2>My Rules</h2>
+
+    	<div class="content-area">
+			<form action="" class="rules-form" method="post">
+				<ul class="rules-list"></ul>
+				<button class="add-rule" name="add-rule">Add New Rule</button>
+				<input class="submit" name="login" type="submit" value="Save Rules"/>
+			</form>
+		
+		</div>
+
+	</div>
+
+</body>
+</html>
+

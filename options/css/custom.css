@@ -1,0 +1,18 @@
+/**
+ * Custom.css contains style rules that add to or override Chrome default CSS
+ * rules. This allows the default CSS style sheets to be updated easier.
+ * Rules in this file should apply to all option pages.
+ * Application specific CSS should go in the application.css files.
+ */
+
+h1{
+	margin-bottom:20px;
+}
+
+h2{
+	margin:30px 0px 15px 0px;
+}
+
+.page {
+	max-width: 738px;
+}

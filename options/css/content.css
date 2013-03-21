@@ -1,0 +1,598 @@
+/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+    * Use of this source code is governed by a BSD-style license that can be
+    * found in the LICENSE file. */
+
+    .command-title {
+    display: inline-block;
+    margin-top: 1em;
+    }
+
+    .command-container {
+    -webkit-box-orient: horizontal;
+    display: -webkit-box;
+    width: 450px;
+    }
+
+    .command-description {
+    -webkit-box-flex: 1;
+    display: -webkit-box;
+    margin-top: 0.5em;
+    min-height: 2em;
+    }
+
+    .command-shortcut-container {
+    display: -webkit-box;
+    margin-top: 0.25em;
+    min-height: 2em;
+    }
+
+    .command-shortcut {
+    border: solid 1px #BFBFBF;
+    border-radius: 2px;
+    color: rgb(48, 57, 66);
+    display: inline-block;
+    height: 1.4em;
+    min-width: 12.5em;
+    outline: none;
+    padding: 3px 0 1px 4px;
+    }
+
+    .clearable {
+    background: white;
+    }
+
+    .capturing {
+    background: rgb(243, 244, 255);
+    border: solid 1px rgb(140, 147, 255);
+    color: #999;
+    }
+
+    .contains-chars {
+    color: rgb(48, 57, 66);
+    }
+
+    .inactive-keybinding {
+    color: #999;
+    }
+
+/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+    * Use of this source code is governed by a BSD-style license that can be
+    * found in the LICENSE file. */
+
+    html.loading * {
+    -webkit-transition-duration: 0 !important;
+    }
+
+    /* Developer mode */
+
+    #dev-controls {
+    -webkit-padding-end: 3px;
+    -webkit-padding-start: 4px;
+    -webkit-transition: padding 100ms, height 100ms, opacity 100ms;
+    border-bottom: 1px solid #eee;
+    display: -webkit-box;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    }
+
+    #dev-controls-spacer {
+    -webkit-box-flex: 1;
+    }
+
+    #dev-toggle {
+    margin-top: 0;
+    text-align: end;
+    }
+
+    .developer-extras > div {
+    margin: 5px 0;
+    }
+
+    /* Contents */
+
+    #suggest-gallery {
+    -webkit-padding-start: 10px;
+    }
+
+    #footer-section {
+    font-size: 1.25em;
+    }
+
+    #footer-section > a {
+    -webkit-margin-start: 42px;
+    line-height: 32px;
+    }
+
+    .enable-controls {
+    /* Matches right: position of dev controls toggle. */
+    -webkit-margin-end: 20px;
+    position: relative;
+    }
+
+    .enable-checkbox-text {
+    /* Matches width of trash. */
+    -webkit-margin-end: 30px;
+    }
+
+    .checkbox {
+    display: inline-block;
+    }
+
+    .enabled-text {
+    font-weight: bold;
+    }
+
+    .load-path > span {
+    word-wrap: break-word;
+    }
+
+    .terminated-reload-link {
+    -webkit-margin-end: 2em;
+    }
+
+    .install-warnings a {
+    -webkit-margin-start: 0;
+    }
+
+    .butter-bar {
+    border-radius: 3px;
+    margin-top: 5px;
+    padding: 2px 5px;
+    }
+
+    .butter-bar {
+    background: rgb(255, 242, 153);
+    }
+
+    #font-measuring-div {
+    /* Remove from the flow and hide. */
+    position: absolute;
+    visibility: hidden;
+    }
+
+    /* Overlays */
+
+    #overlay {
+    z-index: 5;
+    }
+
+    #overlay .page:not(.showing) {
+    display: none;
+    }
+
+    #dropTargetOverlay {
+    color: rgb(48, 57, 66);
+    font-size: 18px;
+    text-align: center;
+    }
+
+    #dropTargetOverlay div {
+    margin: 1em;
+    }
+
+    /* Trash */
+
+    .may-not-disable .optional-controls {
+    display: none;
+    }
+
+    /* Managed mode */
+
+    .page:not(.managed-mode) #managed-mode-banner {
+    display: none;
+    }
+
+/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+    * Use of this source code is governed by a BSD-style license that can be
+    * found in the LICENSE file. */
+
+	/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ 	* Use of this source code is governed by a BSD-style license that can be
+ 	* found in the LICENSE file. */
+
+	#alertOverlay {
+  	width: 500px;
+	}
+
+	#alertOverlayMessage {
+  	white-space: pre-wrap;
+  	word-wrap: break-word;
+	}
+
+	/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ 	* Use of this source code is governed by a BSD-style license that can be
+ 	* found in the LICENSE file. */
+
+	/* The shield that overlays the background. */
+	.overlay {
+  	-webkit-box-align: center;
+  	-webkit-box-orient: vertical;
+  	-webkit-box-pack: center;
+  	-webkit-transition: 200ms opacity;
+  	background-color: rgba(255, 255, 255, 0.75);
+  	bottom: 0;
+  	display: -webkit-box;
+  	left: 0;
+  	overflow: auto;
+  	padding: 20px;
+  	position: fixed;
+  	right: 0;
+  	top: 0;
+	}
+
+	/* Used to slide in the overlay. */
+	.overlay.transparent .page {
+  	/* TODO(flackr): Add perspective(500px) rotateX(5deg) when accelerated
+   	* compositing is enabled on chrome:// pages. See http://crbug.com/116800. */
+  	-webkit-transform: scale(0.99) translateY(-20px);
+	}
+
+	/* The foreground dialog. */
+	.overlay .page {
+  	-webkit-border-radius: 3px;
+  	-webkit-box-orient: vertical;
+  	-webkit-transition: 200ms -webkit-transform;
+  	background: white;
+  	box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0,0,0,0.15);
+  	color: #333;
+  	display: -webkit-box;
+  	min-width: 400px;
+  	padding: 0;
+  	position: relative;
+	}
+
+	/* If the options page is loading don't do the transition. */
+	.loading .overlay,
+	.loading .overlay .page {
+  	-webkit-transition-duration: 0 !important;
+	}
+
+	/* keyframes used to pulse the overlay */
+	@-webkit-keyframes pulse {
+ 	0% {
+   	-webkit-transform: scale(1);
+ 	}
+ 	40% {
+   	-webkit-transform: scale(1.02);
+  	}
+ 	60% {
+   	-webkit-transform: scale(1.02);
+  	}
+ 	100% {
+   	-webkit-transform: scale(1);
+ 	}
+	}
+
+	.overlay .page.pulse {
+  	-webkit-animation-duration: 180ms;
+  	-webkit-animation-iteration-count: 1;
+  	-webkit-animation-name: pulse;
+  	-webkit-animation-timing-function: ease-in-out;
+	}
+
+	.overlay .page > .close-button {
+  	background-image: -webkit-image-set(url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAZElEQVQ4y2P4//8/A7Uxw6ih9DO0qKgIhvmR2Bhi5Bg6DYjPA7EokoEg9iWoHMmG8kM1/4fSokgGwsT4yXEpuiHolpAdpsgGoxg4qAyluvdpFlEz0b0LZV+Fyg2CxD9aSo0AQwGVuKSgRDiuoQAAAABJRU5ErkJggg==') 1x, url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAp0lEQVRYw+3USwrAMAgE0Jw5F9CbpwRC6Uetq7Gls5jdgA9E2xijfSHlAEIJJZRQQgn9GbT3PiMrLZm9j4TOgWMlgz31kVA9DH7CyqWr6NVnsDckevUZrImsgnpYF1kJtbAushrqYdXqVkPFgMrboBKsXt4CtQ4nfF0V0Oi6XSwaGr6gCIuEZpAuFgnVJNLCKnr1mkTe+jAoOuUAQgkllFBCCSWU0JkNhqxZCgZcGioAAAAASUVORK5CYII=') 2x);
+  	background-position: center;
+  	background-repeat: no-repeat;
+  	height: 24px;
+  	position: absolute;
+  	right: 10px;
+  	top: 10px;
+  	width: 24px;
+	}
+
+	html[dir='rtl'] .overlay .page > .close-button {
+  	left: 10px;
+  	right: auto;
+	}
+
+	.overlay .page > .close-button:hover {
+  	background-image: -webkit-image-set(url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAA1klEQVQ4y2P4//8/A7Uxw9A0tKioCB3zA3E1EK8D4odAfAOIlwJxJhDzIKslaCiU7QHET4D4Pw4MkrOH6SPGpbEwzVVVVRgGIon9BGIbYgyVhir+f/To0f9Pnjz5X1dXBzcQxH727BlYDsnFnIQMnQxzDUgzCIBokGEwA2FiSC5OI2ToPXRXwQxBtwQpSLbgM5QTPfyQDcZhIAjfxmcoGy0MJdf72wckouBJ6vjx4xiuArFfvHgBlkNKUjzEJP4Eaid+YrPpc1KzKaECJYfoAmWEF9LUwgBlLaNcEfbfxwAAAABJRU5ErkJggg==') 1x, url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAB6ElEQVRYw+2YzWqDQBDHpUgfq+eSd2kpgYAWk0s8iXkFydFL9KCH+AZtn6YtzaWQ2P0XF0Q26+yHQmCFgcTMzvzI7nzseG3bercgngN1oA50JtDlcimV4/F4V5blU5Zlb7vd7muz2ZxXq1ULwWe8Y7+9Qwe6Y/asgzKnfp7nWRzHv+x7SxHoYg3WzgJa1/VDkiQ/VMChYC1sTApaFMVLFEVnXUgusIHjMAno4XAIcfZMIbnAFrP5ahW0qqrHMAwvtiC5BEFwgW0roOzw34vOJHv/L1Soa/qwDR/GoIhUkVP+UGDH9JmPvREocp8oBTVN0/YfGWwfEg/WilIXfGmDsih/vgZAgaVAcoEvbVBUHNmWymBVICHwpQ2KEjh2/kSwqpAQ5utTGxT1mhLRQ1hVSAh8aYOqJHgRLBWSF4BZQIfbTU1dVkCpWy+CVIU12npKMIkCRyXPWgkmNL2qkDpFwTg9yRI+JQWpwBol/GslVCVPUmC7EuqbNiV7mXNKChrTN25KZG0eDxqVPCvSZ7ZPVtq8rnFeoMmdqHFe2L6KrCe4iqwnudzBsI1/FjaGkNavy9gqnCuD6/Kpv92zDCC22y15AAHdWQcQQ+BupPORpun3cKSDd/itG+n4k4103DTPgTpQB+pApfIHrZ7WkP/k+pwAAAAASUVORK5CYII=') 2x);
+	}
+
+	.overlay .page h1 {
+  	-webkit-padding-end: 24px;
+  	-webkit-user-select: none;
+  	color: #333;
+  	/* 120% of the body's font-size of 84% is 16px. This will keep the relative
+   	* size between the body and these titles consistent. */
+  	font-size: 120%;
+  	/* TODO(flackr): Pages like sync-setup and delete user collapse the margin
+   	* above the top of the page. Use padding instead to make sure that the
+   	* headers of these pages have the correct spacing, but this should not be
+   	* necessary. See http://crbug.com/119029. */
+  	margin: 0;
+  	padding: 14px 17px 14px;
+  	text-shadow: white 0 1px 2px;
+	}
+
+	.overlay .page .content-area {
+  	-webkit-box-flex: 1;
+  	overflow: auto;
+  	padding: 6px 17px 6px;
+  	position: relative;
+	}
+
+	.overlay .page .action-area {
+  	-webkit-box-align: center;
+  	-webkit-box-orient: horizontal;
+  	-webkit-box-pack: end;
+  	display: -webkit-box;
+  	padding: 14px 17px;
+	}
+
+	html[dir='rtl'] .overlay .page .action-area {
+  	left: 0;
+	}
+
+	.overlay .page .action-area-right {
+  	display: -webkit-box;
+	}
+
+	.overlay .page .button-strip {
+  	-webkit-box-orient: horizontal;
+  	display: -webkit-box;
+	}
+
+	.overlay .page .button-strip > button {
+  	-webkit-margin-start: 10px;
+  	display: block;
+	}
+
+	/* On OSX 10.7, hidden scrollbars may prevent the user from realizing that the
+ 	* overlay contains scrollable content. To resolve this, style the scrollbars on
+ 	* OSX so they are always visible. See http://crbug.com/123010. */
+	.overlay .page .content-area::-webkit-scrollbar {
+  	-webkit-appearance: none;
+  	width: 11px;
+	}
+
+	.overlay .page .content-area::-webkit-scrollbar-thumb {
+  	background-color: rgba(0, 0, 0, 0.2);
+  	border: 2px solid white;
+  	border-radius: 8px;
+	}
+
+	.overlay .page .content-area::-webkit-scrollbar-thumb:hover {
+  	background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ 	* Use of this source code is governed by a BSD-style license that can be
+ 	* found in the LICENSE file.
+ 	*/
+
+	.trash {
+  	-webkit-appearance: none;
+  	background: none;
+  	border: none;
+  	cursor: pointer;
+  	display: inline-block;
+  	outline: none;
+  	padding: 0;
+  	position: relative;
+  	width: 30px;
+	}
+
+	.trash > span {
+  	display: inline-block;
+	}
+
+	.trash > .can,
+	.trash > .lid {
+  	left: 8px;
+  	position: absolute;
+  	right: 8px;
+  	top: 2px;
+	}
+
+	.trash > .lid {
+  	-webkit-transform-origin: -7% 100%;
+  	-webkit-transition: -webkit-transform 150ms;
+  	height: 6px;
+  	width: 14px;
+	}
+
+	html[dir='rtl'] .trash > .lid {
+  	-webkit-transform-origin: 107% 100%;
+	}
+
+	.trash:focus > .lid,
+	.trash:hover > .lid {
+  	-webkit-transform: rotate(-45deg);
+  	-webkit-transition: -webkit-transform 250ms;
+	}
+
+	html[dir='rtl'] .trash:focus > .lid,
+	html[dir='rtl'] .trash:hover > .lid {
+  	-webkit-transform: rotate(45deg);
+	}
+
+	.trash > .can {
+  	background-position: -1px -4px;
+  	height: 12px;
+  	/* The margins match the background position offsets. */
+  	margin-left: 1px;
+  	/* The right margin is one greater due to a shadow on the trash image. */
+  	margin-right: 2px;
+  	margin-top: 4px;
+  	width: 11px;
+	}
+
+/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+    * Use of this source code is governed by a BSD-style license that can be
+    * found in the LICENSE file. */
+
+    body.uber-frame {
+    -webkit-margin-start: 155px;
+    color: rgb(48, 57, 66);
+    }
+
+    html[dir='rtl'] body.uber-frame {
+    /* Enable vertical scrollbar at all times in RTL to avoid visual glitches when
+    * showing sub-pages that vertically overflow. */
+    overflow-y: scroll;
+    }
+
+    /* TODO(dbeam): Remove .page class from overlays in settings so the junk below
+    * isn't necessary. */
+    body.uber-frame #mainview-content .page,
+    body.uber-frame .subpage-sheet-container .page,
+    body.uber-frame > .page {
+    -webkit-margin-end: 24px;
+    min-width: 576px;
+    padding-bottom: 20px;
+    padding-top: 55px;
+    }
+
+    body.uber-frame header {
+    background-image: -webkit-linear-gradient(white,
+                                            white 40%,
+                                            rgba(255, 255, 255, 0.92));
+    left: 155px;
+    /* <section>s in options currently amount to 638px total, broken up into
+    * 600px max-width + 18px -webkit-padding-start + 20px -webkit-margin-end
+    * so we mirror this value here so the headers match width and horizontal
+    * alignment when scrolling sideways. */
+    max-width: 738px;
+    min-width: 600px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    /* list.css sets a z-index of up to 2, this is set to 3 to ensure that the
+    * header is in front of the selected list item. */
+    z-index: 3;
+    }
+
+    html[dir='rtl'] body.uber-frame header {
+    left: 0;
+    right: 155px;
+    }
+
+    body.uber-frame header > .search-field-container,
+    body.uber-frame header > .header-extras,
+    body.uber-frame header > button {
+    position: absolute;
+    right: 20px;
+    top: 21px;
+    }
+
+    html[dir='rtl'] body.uber-frame header > .search-field-container,
+    html[dir='rtl'] body.uber-frame header > .header-extras,
+    html[dir='rtl'] body.uber-frame header > button {
+    left: 20px;
+    right: auto;
+    }
+
+    body.uber-frame header input[type='search'],
+    body.uber-frame header input[type='text'],
+    body.uber-frame header button {
+    margin: 0;
+    }
+
+    body.uber-frame header > h1 {
+    margin: 0;
+    padding: 21px 0 13px;
+    }
+
+    /* Create a border under the h1 (but before anything that gets appended
+    * to the end of the header, such as the managed prefs banner). */
+    body.uber-frame header > h1::after {
+    -webkit-margin-end: 20px;
+    background-color: #eee;
+    content: ' ';
+    display: block;
+    height: 1px;
+    position: relative;
+    top: 13px;
+    }
+
+    body.uber-frame footer {
+    border-top: 1px solid #eee;
+    margin-top: 16px;
+    /* min-width and max-width should match the header */
+    max-width: 638px;
+    min-width: 600px;
+    padding: 8px 0;
+    }
+
+    /* Sections are used in options pages, help page and history page. This defines
+    * the section metrics to match the header metrics above. */
+    body.uber-frame section {
+    -webkit-padding-start: 18px;
+    margin-bottom: 24px;
+    margin-top: 8px;
+    max-width: 600px;
+    }
+
+    body.uber-frame section:last-of-type {
+    margin-bottom: 0;
+    }
+
+    body.uber-frame section > h3 {
+    -webkit-margin-start: -18px;
+    }
+
+    @media(pointer:coarse) {
+    /* TODO(kevers):  Remove the extra padding once the following bug is fixed:
+    * https://bugs.webkit.org/show_bug.cgi?id=95204
+    * In the interim, the added padding makes it less likely that a touch will
+    * span the boundary of the navigation bar, which results in poor touch
+    * adjustments. */
+    body.uber-frame section {
+    -webkit-padding-start: 28px;
+    }
+    body.uber-frame section > h3 {
+    -webkit-margin-start: -28px;
+    }
+    }
+
+    body.uber-frame section > div:only-of-type {
+    -webkit-box-flex: 1;
+    }
+
+    /* Styles for a hideable notification banner at the top of a page.
+    * See the Options page .managed-prefs-banner for a usage example. */
+    .page.showing-banner {
+    margin-top: 45px;
+    }
+
+    .page-banner {
+    background-color: white;
+    width: 100%;
+    z-index: 2;
+    }
+
+    .page:not(.showing-banner) .page-banner {
+    display: none;
+    }
+
+    .page-banner-gradient {
+    background: -webkit-linear-gradient(rgb(255, 242, 183),
+                                      rgb(250, 230, 145));
+    border: 1px solid rgb(201, 189, 141);
+    border-radius: 3px;
+    height: 25px;
+    margin: 9px 9px 0 9px;
+    }
+
+    .page-banner .page-banner-gradient {
+    -webkit-margin-end: 20px;
+    -webkit-margin-start: 0;
+    margin-bottom: 9px;
+    }
+
+    .page-banner-text {
+    background-position: 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    display: block;
+    line-height: 24px;
+    padding-left: 26px;
+    }
+
+    .page-banner.clickable:active .page-banner-text {
+    background: -webkit-linear-gradient(rgb(250, 230, 145),
+                                      rgb(255, 242, 183));
+    }

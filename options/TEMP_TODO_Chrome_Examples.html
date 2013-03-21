@@ -1,0 +1,906 @@
+<html i18n-values="dir:textdirection;" class="" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+	<link rel="stylesheet" href="/options/css/chrome_shared.css">
+	<link rel="stylesheet" href="/options/css/content.css">
+    <title></title>
+</head>
+
+<body class="uber-frame" i18n-values=".style.fontFamily:fontfamily;.style.fontSize:fontsize" style="font-family: 'Lucida Grande', sans-serif; font-size: 75%;">
+    <div id="overlay" class="overlay" hidden="">
+        <!--
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found
+ * in the LICENSE file.
+-->
+
+        <div id="extensionCommandsOverlay" class="page" style="max-height: 635.4px;">
+            <div class="close-button"></div>
+
+            <h1 i18n-content="extensionCommandsOverlay">Keyboard Shortcuts - Extensions and Apps</h1>
+
+            <div class="content-area">
+                <div id="extension-command-list" class="">
+                    <div class="extension-command-list-extension-item-wrapper">
+                        <div class="extension-command-list-extension-item">
+                            <div class="extension-command-extension-details">
+                                <div>
+                                    <span class="extension-title command-title">LastPass</span>
+
+                                    <div class="command-details"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="extension-command-list-command-item-wrapper" id="command-hdokiejnpimakedhajhdlcegeplioahd-_execute_browser_action">
+                        <div class="extension-command-list-command-item">
+                            <div class="extension-command-details">
+                                <div class="command-container">
+                                    <span class="command-description">Activate the extension</span> <span class="command-shortcut-container"><span class=
+                                    "command-shortcut clearable inactive-keybinding" tabindex="0">Not set</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="no-commands" hidden="">
+                    <span id="no-extensions-commands-message" i18n-content="extensionCommandsEmpty">No extensions have keyboard shortcuts assigned.</span>
+                </div>
+            </div>
+
+            <div class="action-area">
+                <div class="action-area-right">
+                    <div class="button-strip">
+                        <button id="extensionCommandsDismiss" i18n-content="ok">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="template-collection-extension-commands" hidden="">
+            <div class="extension-command-list-extension-item-wrapper">
+                <div class="extension-command-list-extension-item">
+                    <div class="extension-command-extension-details">
+                        <div>
+                            <div class="command-details"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-command-list-command-item-wrapper">
+                <div class="extension-command-list-command-item">
+                    <div class="extension-command-details">
+                        <div class="command-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="packExtensionOverlay" class="page" style="max-height: 635.4px;">
+            <h1 i18n-content="packExtensionOverlay">Pack Extension</h1>
+
+            <div id="cbd-content-area" class="content-area">
+                <div class="pack-extension-heading" i18n-content="packExtensionHeading">
+                    Select the root directory of the extension to pack. To update an extension, also select the private key file to reuse.
+                </div>
+
+                <div class="pack-extension-text-boxes">
+                    <label i18n-content="packExtensionRootDir">Extension root directory:</label> <input class="pack-extension-text-area" id="extensionRootDir" type="text" /> <button id=
+                    "browseExtensionDir" i18n-content="packExtensionBrowseButton">Browse...</button>
+                </div>
+
+                <div class="pack-extension-text-boxes">
+                    <label i18n-content="packExtensionPrivateKey">Private key file (optional):</label> <input class="pack-extension-text-area" id="extensionPrivateKey" type="text" /> <button id=
+                    "browsePrivateKey" i18n-content="packExtensionBrowseButton">Browse...</button>
+                </div>
+            </div>
+
+            <div class="action-area">
+                <div class="action-area-right">
+                    <div class="button-strip">
+                        <button id="packExtensionDismiss" i18n-content="cancel">Cancel</button> <button id="packExtensionCommit" i18n-content="packExtensionCommit">Pack Extension</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="alertOverlay" class="page" style="max-height: 635.4px;">
+            <h1 id="alertOverlayTitle"></h1>
+
+            <div class="content-area">
+                <div id="alertOverlayMessage"></div>
+            </div>
+
+            <div class="action-area">
+                <div class="button-strip">
+                    <button id="alertOverlayCancel" type="reset"></button> <button id="alertOverlayOk" type="submit"></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="dropTargetOverlay" class="page" style="max-height: 635.4px;">
+            <div i18n-content="extensionSettingsInstallDropTarget">
+                Drop to install
+            </div>
+        </div>
+    </div>
+
+    <div class="page dev-mode" id="extension-settings">
+        <h1 i18n-content="extensionSettings">Extensions</h1>
+
+        <div id="dev-toggle" class="checkbox header-extras">
+            <label><input id="toggle-dev-on" type="checkbox" /> <span i18n-content="extensionSettingsDeveloperMode">Developer mode</span></label>
+        </div>
+
+        <div id="managed-mode-banner" class="page-banner managed-mode-banner">
+            <div class="page-banner-gradient">
+                <span id="managed-prefs-text" class="page-banner-text" i18n-content="extensionSettingsManagedMode">Extensions cannot be modified in managed mode.</span>
+            </div>
+        </div>
+
+        <div id="dev-controls">
+            <button id="load-unpacked" i18n-content="extensionSettingsLoadUnpackedButton">Load unpacked extension...</button> <button id="pack-extension" i18n-content=
+            "extensionSettingsPackButton">Pack extension...</button>
+
+            <div id="dev-controls-spacer"></div><button id="update-extensions-now" i18n-content="extensionSettingsUpdateButton">Update extensions now</button>
+        </div>
+
+        <div id="extension-settings-list" class="">
+            <div class="extension-list-item-wrapper inactive-extension" id="bglgdlbhmdembiicgjaphllhapomdjke">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">New Tab</span> <span class="extension-version">0.1</span>
+                        </div>
+
+                        <p class="extension-description"><a class="site-link" target="_parent" hidden=""></a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">bglgdlbhmdembiicgjaphllhapomdjke</span>
+                            </div>
+
+                            <div class="load-path">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span> <span>/Users/laskey/.dot-files/chrome-extensions/math-homepage</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views" hidden="">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#"></a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#" hidden="">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#"
+                            hidden="">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper" id="pkeogieagagbmknjmkcdpbglnhoedfnm">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">Pre-Pin</span> <span class="extension-version">1.6.0</span>
+                        </div>
+
+                        <p class="extension-description"><span>Pre-Pin extends the capabilities of the Pinterest Pin It! bookmarklet. For more information visit the github homepage.</span> <a class=
+                        "site-link" target="_parent" href="http://github.com/chrislaskey/pre-pin">Visit website</a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">pkeogieagagbmknjmkcdpbglnhoedfnm</span>
+                            </div>
+
+                            <div class="load-path">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span> <span>/Users/laskey/.dot-files/chrome-extensions/pre-pin</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#">background.html</a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#" hidden="">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#"
+                            hidden="">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper" id="blkpebaoadaghoiciaaliaefmblecjgh">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">Site Visit Limiter</span> <span class="extension-version">0.1.0</span>
+                        </div>
+
+                        <p class="extension-description"><span>Site Visit Limiter allows you to limit how many times a site can be visited in a day</span> <a class="site-link" target="_parent" href=
+                        "http://github.com/chrislaskey/site-visit-limiter">Visit website</a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">blkpebaoadaghoiciaaliaefmblecjgh</span>
+                            </div>
+
+                            <div class="load-path">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span> <span>/Users/laskey/.dot-files/chrome-extensions/site-visit-limiter</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#">background.html</a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#" hidden=
+                            "">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper" id="bgooagnldgamnijpmapdcoaipggbhlmj">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">View | Chris Laskey</span> <span class="extension-version">1.2.0</span>
+                        </div>
+
+                        <p class="extension-description"><span>A image capturing extension for view.chrislaskey.com</span> <a class="site-link" target="_parent" href=
+                        "http://view.chrislaskey.com/">Visit website</a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">bgooagnldgamnijpmapdcoaipggbhlmj</span>
+                            </div>
+
+                            <div class="load-path">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span> <span>/Users/laskey/.dot-files/chrome-extensions/view</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#">background.html</a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#" hidden=
+                            "">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper" id="cfhdojbkjhnklbpkdaibdccddilifddb">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">Adblock Plus</span> <span class="extension-version">1.3.1</span>
+                        </div>
+
+                        <p class="extension-description"><span>Blocks all annoying ads on the web: video ads on YouTube, Facebook ads, banners and much more.</span> <a class="site-link" target=
+                        "_parent" href="https://chrome.google.com/webstore/detail/cfhdojbkjhnklbpkdaibdccddilifddb">Visit website</a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">cfhdojbkjhnklbpkdaibdccddilifddb</span>
+                            </div>
+
+                            <div class="load-path" hidden="">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#">_generated_background_page.html</a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#" hidden=
+                            "">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#" hidden="">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper" id="ejpepffjfmamnambagiibghpglaidiec">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">Facebook Disconnect</span> <span class="extension-version">1.3.0</span>
+                        </div>
+
+                        <p class="extension-description"><span>Stop Facebook from tracking the webpages you go to.</span> <a class="site-link" target="_parent" href=
+                        "https://chrome.google.com/webstore/detail/ejpepffjfmamnambagiibghpglaidiec">Visit website</a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">ejpepffjfmamnambagiibghpglaidiec</span>
+                            </div>
+
+                            <div class="load-path" hidden="">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views" hidden="">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#"></a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#" hidden="">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#"
+                            hidden="">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#" hidden="">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper inactive-extension" id="bedbecnakfcpmkpddjfnfihogkaggkhl">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">Language Immersion for Chrome</span> <span class="extension-version">1.0.3</span>
+                        </div>
+
+                        <p class="extension-description"><span>Experience a new language while you browse the web.</span> <a class="site-link" target="_parent" href=
+                        "https://chrome.google.com/webstore/detail/bedbecnakfcpmkpddjfnfihogkaggkhl">Visit website</a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">bedbecnakfcpmkpddjfnfihogkaggkhl</span>
+                            </div>
+
+                            <div class="load-path" hidden="">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views" hidden="">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#"></a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#" hidden="">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#"
+                            hidden="">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#" hidden="">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper" id="hdokiejnpimakedhajhdlcegeplioahd">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">LastPass</span> <span class="extension-version">2.0.15</span>
+                        </div>
+
+                        <p class="extension-description"><span>LastPass is a free password manager and form filler. LastPass is also available for Firefox, Internet Explorer, Opera and Safari.</span>
+                        <a class="site-link" target="_parent" hidden=""></a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">hdokiejnpimakedhajhdlcegeplioahd</span>
+                            </div>
+
+                            <div class="load-path" hidden="">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#">background.html</a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control"><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label> <a class=
+                            "options-link" i18n-content="extensionSettingsOptions" href="#">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#" hidden=
+                            "">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#" hidden="">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper inactive-extension" id="cljcgchbnolheggdgaeclffeagnnmhno">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">Nanny for Google Chrome (TM)</span> <span class="extension-version">0.993</span>
+                        </div>
+
+                        <p class="extension-description"><span>Nanny for Google Chrome (previously Chrome Nanny) allows you to be more productive and less distracted by blocking sites.</span>
+                        <a class="site-link" target="_parent" href="https://chrome.google.com/webstore/detail/cljcgchbnolheggdgaeclffeagnnmhno">Visit website</a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">cljcgchbnolheggdgaeclffeagnnmhno</span>
+                            </div>
+
+                            <div class="load-path" hidden="">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views" hidden="">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#"></a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#" hidden="">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#"
+                            hidden="">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#" hidden="">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper" id="ccjhmanjcinnojaidghpdcbfhehijaib">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">Reddit Reveal</span> <span class="extension-version">0.2</span>
+                        </div>
+
+                        <p class="extension-description"><span>Reveals: up/down votes scores for comments. vote score for new posts, markdown source, and account age (in days).</span> <a class=
+                        "site-link" target="_parent" href="https://chrome.google.com/webstore/detail/ccjhmanjcinnojaidghpdcbfhehijaib">Visit website</a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">ccjhmanjcinnojaidghpdcbfhehijaib</span>
+                            </div>
+
+                            <div class="load-path" hidden="">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views" hidden="">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#"></a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#" hidden="">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#"
+                            hidden="">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#" hidden="">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extension-list-item-wrapper inactive-extension" id="laankejkbhbdhmipfmgcngdelahlfoji">
+                <div class="extension-list-item">
+                    <div class="extension-details">
+                        <div>
+                            <span class="extension-title">StayFocusd</span> <span class="extension-version">1.3.7</span>
+                        </div>
+
+                        <p class="extension-description"><span>StayFocusd increases your productivity by limiting the amount of time that you can spend on time-wasting websites.</span> <a class=
+                        "site-link" target="_parent" href="https://chrome.google.com/webstore/detail/laankejkbhbdhmipfmgcngdelahlfoji">Visit website</a></p>
+
+                        <div class="developer-extras">
+                            <div>
+                                <span i18n-content="extensionSettingsExtensionId">ID:</span> <span class="extension-id">laankejkbhbdhmipfmgcngdelahlfoji</span>
+                            </div>
+
+                            <div class="load-path" hidden="">
+                                <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span>
+                            </div>
+
+                            <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                                (This extension is managed and cannot be removed or disabled.)
+                            </div>
+
+                            <div class="active-views" hidden="">
+                                <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#"></a>
+                            </div>
+
+                            <div class="extension-warnings" hidden="">
+                                <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                            </div>
+
+                            <div class="install-warnings" hidden="">
+                                <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                            </div>
+                        </div>
+
+                        <div class="optional-controls">
+                            <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                            <div class="checkbox">
+                                <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                            </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                            <a class="options-link" i18n-content="extensionSettingsOptions" href="#" hidden="">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#"
+                            hidden="">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#" hidden="">Reload (Ã¢Å’ËœR)</a>
+                        </div>
+
+                        <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                            <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                        </div>
+                    </div>
+
+                    <div class="enable-controls">
+                        <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                        <div class="checkbox enable-checkbox">
+                            <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class=
+                            "enable-text" i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="no-extensions">
+            <span id="no-extensions-message" i18n-content="extensionSettingsNoExtensions">Boo... You have no extensions :-(</span> <span id="suggest-gallery" class="more-extensions-link" i18n-values=
+            ".innerHTML:extensionSettingsSuggestGallery">Want to <a target="_blank" href="https://chrome.google.com/webstore/category/extensions?hl=en-US">browse the gallery</a> instead?</span>
+        </div>
+
+        <div id="footer-section">
+            <a target="blank_" class="more-extensions-link" i18n-values="href:extensionSettingsGetMoreExtensionsUrl" i18n-content="extensionSettingsGetMoreExtensions" href=
+            "https://chrome.google.com/webstore/category/extensions?hl=en-US">Get more extensions</a> <a target="blank_" class="extension-commands-config" i18n-content="extensionSettingsCommandsLink"
+            href="#">Configure commands</a>
+        </div>
+    </div><span id="font-measuring-div">Developer mode</span>
+
+    <div id="template-collection" hidden="">
+        <div class="extension-list-item-wrapper">
+            <div class="extension-list-item">
+                <div class="extension-details">
+                    <p class="extension-description"><a class="site-link" target="_parent" hidden=""></a></p>
+
+                    <div class="developer-extras">
+                        <div>
+                            <span i18n-content="extensionSettingsExtensionId">ID:</span>
+                        </div>
+
+                        <div class="load-path" hidden="">
+                            <span i18n-content="extensionSettingsExtensionPath">Loaded from:</span>
+                        </div>
+
+                        <div class="managed-message" i18n-content="extensionSettingsPolicyControlled" hidden="">
+                            (This extension is managed and cannot be removed or disabled.)
+                        </div>
+
+                        <div class="active-views" hidden="">
+                            <span i18n-content="extensionSettingsInspectViews">Inspect views:</span> <a href="#"></a>
+                        </div>
+
+                        <div class="extension-warnings" hidden="">
+                            <span i18n-content="extensionSettingsWarningsTitle">Warning:</span>
+                        </div>
+
+                        <div class="install-warnings" hidden="">
+                            <span i18n-content="extensionSettingsInstallWarnings">There were warnings when trying to install this extension:</span>
+                        </div>
+                    </div>
+
+                    <div class="optional-controls">
+                        <button class="show-button" i18n-content="extensionSettingsShowButton" hidden="">Show button</button>
+
+                        <div class="checkbox">
+                            <label class="incognito-control"><input type="checkbox" /> <span i18n-content="extensionSettingsEnableIncognito">Allow in incognito</span></label>
+                        </div><label class="file-access-control" hidden=""><input type="checkbox" /> <span i18n-content="extensionSettingsAllowFileAccess">Allow access to file URLs</span></label>
+                        <a class="options-link" i18n-content="extensionSettingsOptions" href="#" hidden="">Options</a> <a class="activity-link" i18n-content="extensionSettingsActivity" href="#"
+                        hidden="">Activity</a> <a class="reload-link" i18n-content="extensionSettingsReloadUnpacked" href="#" hidden="">Reload (Ã¢Å’ËœR)</a>
+                    </div>
+
+                    <div class="butter-bar" i18n-values=".innerHTML:extensionSettingsIncognitoWarning" hidden="">
+                        <b>Warning:</b> Google Chrome cannot prevent extensions from recording your browsing history. To disable this extension in incognito mode, unselect this option.
+                    </div>
+                </div>
+
+                <div class="enable-controls">
+                    <a class="terminated-reload-link" href="#" i18n-content="extensionSettingsReloadTerminated" hidden="">Reload</a>
+
+                    <div class="checkbox enable-checkbox" hidden="">
+                        <label><input type="checkbox" /> <span class="enable-checkbox-text"><span class="enabled-text" i18n-content="extensionSettingsEnabled">Enabled</span> <span class="enable-text"
+                        i18n-content="extensionSettingsEnable">Enable</span></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

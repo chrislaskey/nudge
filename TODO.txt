@@ -1,0 +1,1 @@
+Drop "site-visit-limiter" part of chrome.storage locations. These should be namespaced, making the prefix on "history" and "rules" uneeded. Double check with cloned extension.

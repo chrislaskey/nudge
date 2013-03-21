@@ -1,0 +1,24 @@
+{
+	"manifest_version": 2,
+	"name": "Site Visit Limiter",
+	"version": "0.1.0",
+	"description": "Site Visit Limiter allows you to limit how many times a site can be visited in a day",
+	"homepage_url": "http://github.com/chrislaskey/site-visit-limiter",
+	"background": {
+		"page": "background.html"
+	},
+	"icons": {
+		"16": "icon.png",
+		"32": "icon.png",
+		"48": "icon.png",
+		"128": "icon.png"
+	},
+	"options_page": "options/main.html",
+	"permissions": [
+		"*://*/*",
+		"storage",
+		"tabs",
+		"unlimitedStorage",
+		"webRequest"
+	]
+}
